@@ -1,4 +1,4 @@
-package team1699.subsystems;
+package frc.team1699.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
 import team1699.subsystems.Subsystem;
 import frc.team1699.Constants;
-
+import frc.team1699.subsystems.Subsystem;
 
 public class Intake implements Subsystem{
 
