@@ -1,4 +1,4 @@
-package team1699.subsystems;
+package frc.team1699.subsystems;
 
 public interface Subsystem{
 
