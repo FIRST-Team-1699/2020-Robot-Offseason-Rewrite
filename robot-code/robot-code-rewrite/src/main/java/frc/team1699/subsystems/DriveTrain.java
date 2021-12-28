@@ -1,10 +1,11 @@
 package frc.team1699.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
-
+import frc.team1699.subsystems.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.PWMSpeedController;
-import frc.team1699.subsystems.Subsystem;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import frc.team1699.Constants;
 
 public class DriveTrain implements Subsystem{
 

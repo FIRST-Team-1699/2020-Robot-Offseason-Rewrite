@@ -5,9 +5,9 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
-import team1699.subsystems.Subsystem;
-import frc.team1699.Constants;
 import frc.team1699.subsystems.Subsystem;
+import frc.team1699.Constants;
+
 
 public class Intake implements Subsystem{
 
@@ -28,9 +28,9 @@ public class Intake implements Subsystem{
     public void update(){
         //TODO Check for joystick button and run intake motor
         if(joystick.getRawButton(1)){
-            talonSRX.set(-0.55);
+            talonSRX.set(TalonSRXControlMode.PercentOutput,-0.55);
         }else{
-            talonSRX.set(0.0);
+            talonSRX.set(TalonSRXControlMode.PercentOutput,0.0);
         }
         
         //TODO Check for joystick button and deploy or retract intake
