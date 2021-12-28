@@ -7,20 +7,18 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Shooter implements Subsystem {
-private final TalonSRX motorcontrol;
-    private final Joystick joystick;
-private final TalonSRX shooterTalonBottom;
-private final DoubleSolenoid flipperBigSolenoid;
-private final DoubleSolenoid shooterAngleSolenoid;
-    public Shooter(final Joystick joystick) {
+  private final TalonSRX motorcontrol;
+   private final Joystick joystick;
+  private final TalonSRX shooterTalonBottom;
+  private final DoubleSolenoid flipperBigSolenoid;
+  private final DoubleSolenoid shooterAngleSolenoid;
+  
+  public Shooter(final Joystick joystick) {
         this.joystick = joystick;
-motorcontrol = new TalonSRX (16);
-shooterTalonBottom = new TalonSRX (12);
-flipperBigSolenoid = new DoubleSolenoid(0, 4, 5);
-shooterAngleSolenoid = new DoubleSolenoid(0, 6, 7);
-        //TODO Create motor object
-       
-        //TODO Create solenoid object
+        motorcontrol = new TalonSRX (16);
+        shooterTalonBottom = new TalonSRX (12);
+        flipperBigSolenoid = new DoubleSolenoid(0, 4, 5);
+        shooterAngleSolenoid = new DoubleSolenoid(0, 6, 7);
     }
 
 
