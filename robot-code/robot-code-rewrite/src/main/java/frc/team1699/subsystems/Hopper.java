@@ -6,14 +6,23 @@ import team1699.subsystems.Subsystem;
 public class Hopper{
 
     private final Joystick joystick;
+    private final MotorController m_motor;
+
 
     public Hopper(final Joystick joystick){
         this.joystick = joystick;
-
-        //TODO Create motor object
+        this.m_motor = new TalonSRX(port);
+        //Motor Object
+        
     }
 
     public void update(){
-        //TODO Check for joystick button and run intake
+        //Checks for joystick button and runs hopper
+        if (joystick.getRawButton(2)){
+            m_motor.set(0.50);
+        } else {
+            m_motor.set(0);
+        }
+
     }
 }
