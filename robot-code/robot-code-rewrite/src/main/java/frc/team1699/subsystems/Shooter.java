@@ -7,10 +7,12 @@ import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 
 public class Shooter implements Subsystem {
   private final TalonSRX motorcontrol;
-   private final Joystick joystick;
+    private final Joystick joystick;
   private final TalonSRX shooterTalonBottom;
   private final DoubleSolenoid flipperBigSolenoid;
   private final DoubleSolenoid shooterAngleSolenoid;
+
+  private final TalonSRX hopper;
   
   public Shooter(final Joystick joystick) {
         this.joystick = joystick;
@@ -18,8 +20,36 @@ public class Shooter implements Subsystem {
         shooterTalonBottom = new TalonSRX (12);
         flipperBigSolenoid = new DoubleSolenoid(0, 4, 5);
         shooterAngleSolenoid = new DoubleSolenoid(0, 6, 7);
+        // Creates object for hopper motor, used to load balls
+        this.hopper = new TalonSRX(Constants.kHopperPort);
+
+        
+    
     }
 
+    public void ShootThenLoad(){
+
+            // Spin up the flywheels
+            shooterTalonBottom.set(TalonSRXControlMode.PercentOutput, 0.55);
+            motorcontrol.set(TalonSRXControlMode.PercentOutput, 0.55);
+            // Delay
+            TimeUnit.SECONDS.sleep(1);
+            // Make sure flipper is down
+            if(flipperBigSolenoid.get() == DoubleSolenoid.Value.kForward){
+                flipperBigSolenoid.set(DoubleSolenoid.Value.kReverse);
+            }else{
+                flipperBigSolenoid.set(DoubleSolenoid.Value.kForward);
+            }
+            // Run the hopper motor for some time
+            hopper.set(TalonSRXControlMode.PercentOutput, -0.50);
+            TimeUnit.SECONDS.sleep(1);
+            hopper.set(TalonSRXControlMode.PercentOutput, 0);
+            // Make the flipper go up then down
+            flipperBigSolenoid.set(DoubleSolenoid.Value.kReverse);
+            TimeUnit.SECONDS.sleep(0.4);
+            flipperBigSolenoid.set(DoubleSolenoid.Value.kForward);            
+    }
+    
 
     public void update(){
 
@@ -28,6 +58,9 @@ public class Shooter implements Subsystem {
             shooterTalonBottom.set(TalonSRXControlMode.PercentOutput, 0.55);
             motorcontrol.set(TalonSRXControlMode.PercentOutput, 0.55);
         } else {
+            if (joystick.getRawButton(1)){
+                ShootThenLoad();
+            }
             shooterTalonBottom.set(TalonSRXControlMode.PercentOutput, 0);
             motorcontrol.set(TalonSRXControlMode.PercentOutput, 0);
             

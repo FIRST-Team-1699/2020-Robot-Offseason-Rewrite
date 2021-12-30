@@ -26,7 +26,7 @@ public class Intake implements Subsystem{
 
     public void update(){
         //TODO Check for joystick button and run intake motor
-        if(joystick.getRawButton(1)){
+        if(joystick.getRawButton(5)){
             talonSRX.set(TalonSRXControlMode.PercentOutput, -0.55);
         }else{
             talonSRX.set(TalonSRXControlMode.PercentOutput, 0.0);
