@@ -1,11 +1,10 @@
 package frc.team1699.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
-import frc.team1699.subsystems.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.PWMSpeedController;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import frc.team1699.Constants;
+
 
 public class DriveTrain implements Subsystem{
 
@@ -57,10 +56,11 @@ public class DriveTrain implements Subsystem{
             }
         }
 
-        m_rightMotor.set(portOutput);
-        m_leftMotor.set(starOutput);
-        m_rightMotorFR.set(portOutput);
-        m_leftMotorFR.set(starOutput);
+        m_rightMotor.set(TalonFXControlMode.PercentOutput, starOutput);
+        m_leftMotor.set(TalonFXControlMode.PercentOutput, portOutput);
+        m_rightMotorFR.set(TalonFXControlMode.PercentOutput, starOutput);
+        m_leftMotorFR.set(TalonFXControlMode.PercentOutput, portOutput);
+        //System.out.println("Star: " + starOutput + " Port: " + portOutput);
     }
     public void update(){
         //TODO Run arcade drive

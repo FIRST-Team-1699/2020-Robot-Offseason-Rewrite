@@ -1,10 +1,10 @@
 package frc.team1699.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
-import frc.team1699.subsystems.Subsystem;
 
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import frc.team1699.Constants;
 public class Hopper{
 
     private final Joystick joystick;
@@ -21,7 +21,7 @@ public class Hopper{
     public void update(){
         //Checks for joystick button and runs hopper
         if (joystick.getRawButton(2)){
-            m_motor.set(TalonSRXControlMode.PercentOutput, 0.50);
+            m_motor.set(TalonSRXControlMode.PercentOutput, -0.50);
         } else {
             m_motor.set(TalonSRXControlMode.PercentOutput,0);
         }

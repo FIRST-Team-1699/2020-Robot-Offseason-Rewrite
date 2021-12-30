@@ -1,10 +1,9 @@
 package frc.team1699.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
-import frc.team1699.subsystems.Subsystem;
-import edu.wpi.first.wpilibj.motorcontrol.TalonSRX;
-import edu.wpi.first.wpilibj.Solenoid;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 
 public class Shooter implements Subsystem {
   private final TalonSRX motorcontrol;
@@ -26,11 +25,11 @@ public class Shooter implements Subsystem {
 
         //TODO Check for joystick button and run shooter if pressed
         if(joystick.getRawButton(4)){
-            shooterTalonBottom.set(0.55);
-            motorcontrol.set(0.55);
-        } else {(joystick.getRawButton(4)){
-            shooterTalonBottom.set(0);
-            motorcontrol.set(0);
+            shooterTalonBottom.set(TalonSRXControlMode.PercentOutput, 0.55);
+            motorcontrol.set(TalonSRXControlMode.PercentOutput, 0.55);
+        } else {
+            shooterTalonBottom.set(TalonSRXControlMode.PercentOutput, 0);
+            motorcontrol.set(TalonSRXControlMode.PercentOutput, 0);
             
         }
         //TODO Check for joystick button and run flipper if pressed

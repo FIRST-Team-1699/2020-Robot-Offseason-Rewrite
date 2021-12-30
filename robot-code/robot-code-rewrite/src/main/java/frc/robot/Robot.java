@@ -1,12 +1,13 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
-import team1699.Constants;
-import team1699.subsystems.DriveTrain;
-import team1699.subsystems.Shooter;
-import team1699.subsystems.Intake;
-import team1699.subsystems.Hopper;
+import frc.team1699.Constants;
+import frc.team1699.subsystems.DriveTrain;
+import frc.team1699.subsystems.Shooter;
+import frc.team1699.subsystems.Intake;
+import frc.team1699.subsystems.Hopper;
 
 public class Robot extends TimedRobot {
 
@@ -57,14 +58,16 @@ public class Robot extends TimedRobot {
   public void teleopInit() {}
 
   @Override
-  public void teleopPeriodic() {}
-
-  @Override
-  public void disabledInit() {
+  public void teleopPeriodic() {
       kDriveTrain.update();
       kShooter.update();
       kIntake.update();
       kHopper.update();
+  }
+
+  @Override
+  public void disabledInit() {
+      
   }
 
   @Override
