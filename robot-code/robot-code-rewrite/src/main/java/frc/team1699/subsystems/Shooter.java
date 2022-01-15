@@ -1,6 +1,7 @@
 package frc.team1699.subsystems;
-
 import edu.wpi.first.wpilibj.Joystick;
+import frc.team1699.Constants;
+
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
@@ -27,28 +28,28 @@ public class Shooter implements Subsystem {
     
     }
 
-    public void ShootThenLoad(){
+    // public void ShootThenLoad(){
 
-            // Spin up the flywheels
-            shooterTalonBottom.set(TalonSRXControlMode.PercentOutput, 0.55);
-            motorcontrol.set(TalonSRXControlMode.PercentOutput, 0.55);
-            // Delay
-            TimeUnit.SECONDS.sleep(1);
-            // Make sure flipper is down
-            if(flipperBigSolenoid.get() == DoubleSolenoid.Value.kForward){
-                flipperBigSolenoid.set(DoubleSolenoid.Value.kReverse);
-            }else{
-                flipperBigSolenoid.set(DoubleSolenoid.Value.kForward);
-            }
-            // Run the hopper motor for some time
-            hopper.set(TalonSRXControlMode.PercentOutput, -0.50);
-            TimeUnit.SECONDS.sleep(1);
-            hopper.set(TalonSRXControlMode.PercentOutput, 0);
-            // Make the flipper go up then down
-            flipperBigSolenoid.set(DoubleSolenoid.Value.kReverse);
-            TimeUnit.SECONDS.sleep(0.4);
-            flipperBigSolenoid.set(DoubleSolenoid.Value.kForward);            
-    }
+    //         // Spin up the flywheels
+    //         shooterTalonBottom.set(TalonSRXControlMode.PercentOutput, 0.55);
+    //         motorcontrol.set(TalonSRXControlMode.PercentOutput, 0.55);
+    //         // Delay
+    //         TimeUnit.SECONDS.sleep(1);
+    //         // Make sure flipper is down
+    //         if(flipperBigSolenoid.get() == DoubleSolenoid.Value.kForward){
+    //             flipperBigSolenoid.set(DoubleSolenoid.Value.kReverse);
+    //         }else{
+    //             flipperBigSolenoid.set(DoubleSolenoid.Value.kForward);
+    //         }
+    //         // Run the hopper motor for some time
+    //         hopper.set(TalonSRXControlMode.PercentOutput, -0.50);
+    //         TimeUnit.SECONDS.sleep(1);
+    //         hopper.set(TalonSRXControlMode.PercentOutput, 0);
+    //         // Make the flipper go up then down
+    //         flipperBigSolenoid.set(DoubleSolenoid.Value.kReverse);
+    //         TimeUnit.SECONDS.sleep(0.4);
+    //         flipperBigSolenoid.set(DoubleSolenoid.Value.kForward);            
+    // }
     
 
     public void update(){
@@ -57,12 +58,12 @@ public class Shooter implements Subsystem {
         if(joystick.getRawButton(4)){
             shooterTalonBottom.set(TalonSRXControlMode.PercentOutput, 0.55);
             motorcontrol.set(TalonSRXControlMode.PercentOutput, 0.55);
-        } else {
-            if (joystick.getRawButton(1)){
-                ShootThenLoad();
-            }
-            shooterTalonBottom.set(TalonSRXControlMode.PercentOutput, 0);
-            motorcontrol.set(TalonSRXControlMode.PercentOutput, 0);
+        // } else {
+        //     if (joystick.getRawButton(1)){
+        //         ShootThenLoad();
+        //     }
+            // shooterTalonBottom.set(TalonSRXControlMode.PercentOutput, 0);
+            // motorcontrol.set(TalonSRXControlMode.PercentOutput, 0);
             
         }
         //TODO Check for joystick button and run flipper if pressed
