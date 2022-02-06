@@ -9,18 +9,18 @@ public class Constants{
     //Motor Constants
 
     //Port Drive Motor Ports
-    public static final int kPortDriveMainPort = 30;
-    public static final int kPortDriveFollowerPort = 31;
+    public static final int kPortDriveMainPort = 13;
+    public static final int kPortDriveFollowerPort = 11;
 
     //Starboard Drive Motor Ports
-    public static final int kStarDriveMainPort = 32;
-    public static final int kStarDriveFollowerPort = 33;
+    public static final int kStarDriveMainPort = 15;
+    public static final int kStarDriveFollowerPort = 10;
 
-    //Intake Motor Ports
-    public static final int kIntakePort = 11;
+    // //Intake Motor Ports
+    // public static final int kIntakePort = 11;
 
-    //Hopper Motor Ports
-    public static final int kHopperPort = 13;
+    // //Hopper Motor Ports
+    // public static final int kHopperPort = 13;
 
     //Shooter Motor Ports
     public static final int kShooterTopPort = 16;

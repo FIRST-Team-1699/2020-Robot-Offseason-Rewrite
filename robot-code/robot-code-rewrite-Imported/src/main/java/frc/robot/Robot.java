@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.team1699.Constants;
 import frc.team1699.subsystems.DriveTrain;
-import frc.team1699.subsystems.Shooter;
-import frc.team1699.subsystems.Intake;
-import frc.team1699.subsystems.Hopper;
+//import frc.team1699.subsystems.Shooter;
+//import frc.team1699.subsystems.Intake;
+//import frc.team1699.subsystems.Hopper;
 
 public class Robot extends TimedRobot {
 
@@ -17,9 +17,9 @@ public class Robot extends TimedRobot {
 
   //Setup Subsystems
   private DriveTrain kDriveTrain;
-  private Shooter kShooter;
-  private Intake kIntake;
-  private Hopper kHopper;
+ // private Shooter kShooter;
+ // private Intake kIntake;
+ // private Hopper kHopper;
 
   //Setup Compressor
   private Compressor compressor;
@@ -32,9 +32,9 @@ public class Robot extends TimedRobot {
 
       //Init Subsystems
       kDriveTrain = new DriveTrain(driveJoystick);
-      kShooter = new Shooter(operatorJoystick);
-      kIntake = new Intake(operatorJoystick);
-      kHopper = new Hopper(operatorJoystick);
+      //kShooter = new Shooter(operatorJoystick);
+    //  kIntake = new Intake(operatorJoystick);
+    //  kHopper = new Hopper(operatorJoystick);
       
       //Init compressor
      // compressor = new Compressor(0);
@@ -60,9 +60,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
       kDriveTrain.update();
-      kShooter.update();
-      kIntake.update();
-      kHopper.update();
+     // kShooter.update();
+   //   kIntake.update();
+  //    kHopper.update();
   }
 
   @Override

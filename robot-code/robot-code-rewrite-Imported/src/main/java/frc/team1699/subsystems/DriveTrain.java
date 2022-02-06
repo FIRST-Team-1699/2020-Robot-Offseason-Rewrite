@@ -1,28 +1,28 @@
 package frc.team1699.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import frc.team1699.Constants;
 
 
 public class DriveTrain implements Subsystem{
 
-    
+    private double throt;
     private final Joystick joystick;
-    private final TalonFX m_leftMotor;
-    private final TalonFX m_rightMotor;
-    private final TalonFX m_leftMotorFR;
-    private final TalonFX m_rightMotorFR;
+    private final TalonSRX m_leftMotor;
+    private final TalonSRX m_rightMotor;
+    private final TalonSRX m_leftMotorFR;
+    private final TalonSRX m_rightMotorFR;
 
     public DriveTrain(final Joystick joystick){
         this.joystick = joystick;
 
         // creates the motor and drive objects
-        m_leftMotor = new TalonFX(Constants.kPortDriveMainPort);
-        m_rightMotor = new TalonFX(Constants.kStarDriveMainPort);
-        m_leftMotorFR = new TalonFX(Constants.kPortDriveFollowerPort);
-        m_rightMotorFR = new TalonFX(Constants.kStarDriveFollowerPort);
+        m_leftMotor = new TalonSRX(Constants.kPortDriveMainPort);
+        m_rightMotor = new TalonSRX(Constants.kStarDriveMainPort);
+        m_leftMotorFR = new TalonSRX(Constants.kPortDriveFollowerPort);
+        m_rightMotorFR = new TalonSRX(Constants.kStarDriveFollowerPort);
         
     }
     
@@ -57,14 +57,18 @@ public class DriveTrain implements Subsystem{
             }
         }
 
-        m_rightMotor.set(TalonFXControlMode.PercentOutput, starOutput);
-        m_leftMotor.set(TalonFXControlMode.PercentOutput, portOutput);
-        m_rightMotorFR.set(TalonFXControlMode.PercentOutput, starOutput);
-        m_leftMotorFR.set(TalonFXControlMode.PercentOutput, portOutput);
+        throt = (-joystick.getZ() + 1) / 2;
+
+        m_rightMotor.set(TalonSRXControlMode.PercentOutput, starOutput * throt);
+        m_leftMotor.set(TalonSRXControlMode.PercentOutput, portOutput * throt);
+        m_rightMotorFR.set(TalonSRXControlMode.PercentOutput, starOutput * throt);
+        m_leftMotorFR.set(TalonSRXControlMode.PercentOutput, portOutput * throt);
         //System.out.println("Star: " + starOutput + " Port: " + portOutput);
     }
     public void update(){
         //TODO Run arcade drive
         runArcadeDrive(joystick.getX(), -joystick.getY());
+        System.out.println("Throttle: " + throt);
+
     }
 }
