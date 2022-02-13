@@ -20,6 +20,7 @@ public class Robot extends TimedRobot {
   
   private boolean canSeeTarget;
 
+
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTableEntry tx = table.getEntry("tx");
   NetworkTableEntry ty = table.getEntry("ty");
@@ -76,18 +77,20 @@ public class Robot extends TimedRobot {
   //    kHopper.update();
   
     // A bunch of magic numbers used to aim the robot at the target
-    //TODO add numbers
-    final double kSteer = 0.04;
+    final double kSteer = 0.03;
     final double kDrive = 0.26;
 
 
 
-    //read values periodically
+    //limelight values
     double x = tx.getDouble(0.0);
     double y = ty.getDouble(0.0);
     double area = ta.getDouble(0.0);
     double isTarget = tv.getDouble(0.0);
     
+    //how far the x can be away from the target to be considered aimed
+    double kAimMargin = 4;
+
     if (isTarget < 1){
       canSeeTarget = false;
     } else {
@@ -101,15 +104,12 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Target found", isTarget);
     
 
-    if (driveJoystick.getRawButton(1)){
+    if (driveJoystick.getRawButton(1) && Math.abs(x) >= kAimMargin){
+      // its pid but minus the id. its just p. pp. haha.
       kDriveTrain.runArcadeDrive(x*kSteer, 0, false);
     } else {
       kDriveTrain.runArcadeDrive(driveJoystick.getX(), -driveJoystick.getY(), true);
     }
-    
-
-
-
   }
 
   @Override
