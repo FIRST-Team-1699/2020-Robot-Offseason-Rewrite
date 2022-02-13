@@ -1,5 +1,8 @@
 package frc.robot;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -14,6 +17,14 @@ public class Robot extends TimedRobot {
   //Setup Joysticks
   private Joystick driveJoystick; 
   private Joystick operatorJoystick;
+  
+  private boolean canSeeTarget;
+
+  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  NetworkTableEntry tx = table.getEntry("tx");
+  NetworkTableEntry ty = table.getEntry("ty");
+  NetworkTableEntry ta = table.getEntry("ta");
+  NetworkTableEntry tv = table.getEntry("tv");
 
   //Setup Subsystems
   private DriveTrain kDriveTrain;
@@ -59,10 +70,46 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-      kDriveTrain.update();
+    //kDriveTrain.update();
      // kShooter.update();
    //   kIntake.update();
   //    kHopper.update();
+  
+    // A bunch of magic numbers used to aim the robot at the target
+    //TODO add numbers
+    final double kSteer = 0.04;
+    final double kDrive = 0.26;
+
+
+
+    //read values periodically
+    double x = tx.getDouble(0.0);
+    double y = ty.getDouble(0.0);
+    double area = ta.getDouble(0.0);
+    double isTarget = tv.getDouble(0.0);
+    
+    if (isTarget < 1){
+      canSeeTarget = false;
+    } else {
+      canSeeTarget = true;
+    }
+
+    //post to smart dashboard periodically
+    SmartDashboard.putNumber("LimelightX", x);
+    SmartDashboard.putNumber("LimelightY", y);
+    SmartDashboard.putNumber("LimelightArea", area);
+    SmartDashboard.putNumber("Target found", isTarget);
+    
+
+    if (driveJoystick.getRawButton(1)){
+      kDriveTrain.runArcadeDrive(x*kSteer, 0, false);
+    } else {
+      kDriveTrain.runArcadeDrive(driveJoystick.getX(), -driveJoystick.getY(), true);
+    }
+    
+
+
+
   }
 
   @Override

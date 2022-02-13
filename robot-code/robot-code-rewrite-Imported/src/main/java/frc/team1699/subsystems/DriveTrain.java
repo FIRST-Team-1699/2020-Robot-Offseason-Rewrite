@@ -27,7 +27,7 @@ public class DriveTrain implements Subsystem{
     }
     
 
-    protected void runArcadeDrive(double throttle, double rotate) {
+    public void runArcadeDrive(double throttle, double rotate, boolean useThrottle) {
         double portOutput = 0.0;
         double starOutput = 0.0;
 
@@ -57,7 +57,12 @@ public class DriveTrain implements Subsystem{
             }
         }
 
-        throt = (-joystick.getZ() + 1) / 2;
+        if (useThrottle){
+            throt = (-joystick.getZ() + 1) / 2;
+        } else {
+            throt = 1;
+        }
+        
 
         m_rightMotor.set(TalonSRXControlMode.PercentOutput, starOutput * throt);
         m_leftMotor.set(TalonSRXControlMode.PercentOutput, portOutput * throt);
@@ -67,8 +72,8 @@ public class DriveTrain implements Subsystem{
     }
     public void update(){
         //TODO Run arcade drive
-        runArcadeDrive(joystick.getX(), -joystick.getY());
-        System.out.println("Throttle: " + throt);
+        // runArcadeDrive(joystick.getX(), -joystick.getY());
+        //System.out.println("Throttle: " + throt);
 
     }
 }
